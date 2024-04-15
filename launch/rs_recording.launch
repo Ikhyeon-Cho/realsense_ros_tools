@@ -1,0 +1,12 @@
+<launch>
+
+  <rosparam>
+    /camera/depth/image_rect_raw/compressedDepth/png_level: 4
+    /camera/aligned_depth_to_color/image_raw/compressedDepth/png_level: 4
+  </rosparam>
+
+  <include file="$(find realsense_ros_tools)/launch/rs_rgbd.launch" />
+
+  <include file="$(find realsense_ros_tools)/launch/include/record_rs.launch" />
+
+</launch>

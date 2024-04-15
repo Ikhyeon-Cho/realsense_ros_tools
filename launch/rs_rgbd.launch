@@ -1,0 +1,20 @@
+<launch>
+
+  <remap from="/camera/depth_registered/points" to="/camera/color/depth/points" />
+  <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+    <arg name="color_width" default="1280" />
+    <arg name="color_height" default="720" />
+    <arg name="depth_width" default="848" />
+    <arg name="depth_height" default="480" />
+    <arg name="color_fps" value="15" />
+    <arg name="depth_fps" value="15" />
+    <arg name="enable_gyro" default="true" />
+    <arg name="enable_accel" default="true" />
+
+    <arg name="filters" default="temporal,decimation,spatial,disparity" />
+  </include>
+
+  <!-- rviz -->
+  <node name="rviz_rs_rgbd" pkg="rviz" type="rviz" args="-d $(find realsense_ros_tools)/launch/rviz/rs_rgbd.rviz" />
+
+</launch>

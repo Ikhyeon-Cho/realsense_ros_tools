@@ -1,0 +1,10 @@
+<launch>
+  <arg name="img_rect_topic" default="/camera/color/image_rect_color" />
+  <!-- image transport republisher -->
+  <node name="image_republisher" pkg="image_transport" type="republish"
+    args="compressed in:=$(arg img_rect_topic) raw out:=$(arg img_rect_topic)" />
+
+  <!-- run python scripts -->
+  <node pkg="realsense_ros_tools" type="image_subscriber.py" name="image_subscriber" output="screen" />
+
+</launch>
