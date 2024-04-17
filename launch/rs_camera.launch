@@ -1,4 +1,11 @@
 <launch>
+    <!-- For preventing frame drop: High level PNG compression is too slow -->
+  <!-- Change png_level from 9 to 4 -->
+  <rosparam>
+    /camera/depth/image_rect_raw/compressedDepth/png_level: 4
+    /camera/aligned_depth_to_color/image_raw/compressedDepth/png_level: 4
+  </rosparam>
+  
   <include file="$(find realsense2_camera)/launch/rs_camera.launch">
     <arg name="color_fps" value="15" />
     <arg name="depth_fps" value="15" />
