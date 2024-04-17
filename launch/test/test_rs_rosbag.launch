@@ -1,0 +1,6 @@
+<launch>
+  <include file="$(find realsense_ros_tools)/launch/rs_rosbag.launch" />
+
+  <!-- RViz -->
+  <node name="rs_rosbag" pkg="rviz" type="rviz" args="-d $(find realsense_ros_tools)/launch/rviz/rs_camera.rviz" />
+</launch>

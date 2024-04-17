@@ -1,10 +1,14 @@
 <launch>
 
+  <!-- For preventing frame drop: High level PNG compression is too slow -->
+  <!-- Change png_level from 9 to 4 -->
   <rosparam>
     /camera/depth/image_rect_raw/compressedDepth/png_level: 4
     /camera/aligned_depth_to_color/image_raw/compressedDepth/png_level: 4
   </rosparam>
 
   <include file="$(find realsense_ros_tools)/launch/include/record_rs.launch" />
+
+  <include file="$(find realsense_ros_tools)/launch/rs_camera.launch" />
 
 </launch>
