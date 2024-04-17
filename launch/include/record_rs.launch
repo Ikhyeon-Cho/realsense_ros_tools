@@ -1,8 +1,5 @@
 <launch>
   <!-- Record Realsense Camera Topic (rs_camera.bag) -->
-  <node name="rs_camera_recorder" pkg="realsense_ros_tools" type="record_rs_camera.sh" />
-
-  <!-- Realsense RGBD Topic (rs_rgbd.bag) -->
-  <node name="rs_rgbd_recorder" pkg="realsense_ros_tools" type="record_rs_rgbd.sh" output="screen" />
+  <node name="rs_camera_recorder" pkg="realsense_ros_tools" type="record_rs_camera.sh" output="screen" />
 
 </launch>

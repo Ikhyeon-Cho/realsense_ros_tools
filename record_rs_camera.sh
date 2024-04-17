@@ -4,7 +4,6 @@ rosbag_fancy record --lz4 -o ~/rs_camera.bag /camera/color/metadata /camera/dept
   /tf_static \
   /camera/color/camera_info \
   /camera/color/image_raw/compressed \
-  /camera/depth/camera_info \
   /camera/depth/image_rect_raw/compressedDepth \
   /camera/extrinsics/depth_to_color \
   /camera/accel/imu_info \
