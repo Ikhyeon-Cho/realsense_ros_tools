@@ -1,5 +1,5 @@
 <launch>
-  <arg name="bag_file" default="/home/ikhyeon/rs_camera.bag" />
+  <arg name="bag_file" default="rs_camera.bag" />
   <arg name="playback_speed" default="1" />
   <arg name="start_time" default="0.0" />
 
@@ -18,10 +18,10 @@
   <!-- Play rosbag file -->
   <param name="/use_sim_time" value="true" />
   <node name="rs_bag_player" pkg="rosbag" type="play" output="screen"
-    args="--clock -r $(arg playback_speed) -s $(arg start_time) $(arg bag_file)" />
+    args="--clock -r $(arg playback_speed) -s $(arg start_time) /home/ikhyeon/$(arg bag_file)" />
 
   <!-- Publish point cloud -->
-  <include file="$(find realsense_ros_tools)/launch/include/depth2cloud_rgb.launch" >
+  <include file="$(find realsense_ros_tools)/launch/include/_depth2cloud_rgb.launch" >
     <arg name="camera_color_info_topic" value="$(arg camera_color_info_topic)" />
     <arg name="img_rect_color_topic" value="$(arg img_rect_color_topic)" />
     <arg name="img_rect_depth_topic" value="$(arg img_rect_depth_topic)" />
