@@ -68,9 +68,9 @@ roslaunch realsense_ros_tools rs_record.launch    # Default: 'rs_camera.bag' is 
 ```
 The command will save the rosbag file to `$HOME/Downloads` folder. By default, the name of rosbag is `rs_camera.bag`.
 
-For assigning a specific name to the rosbag, use the command with `bagfile_name:=` launch argument like below:
+For assigning a specific name to the rosbag, use the command with `bag_file:=` launch argument like below:
 ```
-roslaunch realsense_ros_tools rs_record.launch bagfile_name:=example.bag    # now, 'example.bag' is saved
+roslaunch realsense_ros_tools rs_record.launch bag_file:=example.bag    # now, 'example.bag' is saved
 ```
 
 ### 3. Data playback

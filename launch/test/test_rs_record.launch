@@ -1,7 +1,9 @@
 <launch>
+  <arg name="bag_file" default="rs_camera.bag" />
 
-
-  <include file="$(find realsense_ros_tools)/launch/rs_record.launch" />
+  <include file="$(find realsense_ros_tools)/launch/rs_record.launch">
+    <arg name="bag_file" value="$(arg bag_file)" />
+  </include>
 
   <!-- RViz -->
   <node name="rs_rosbag" pkg="rviz" type="rviz" args="-d $(find realsense_ros_tools)/launch/rviz/rs_camera.rviz" />
