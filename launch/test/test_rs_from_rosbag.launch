@@ -1,10 +1,12 @@
 <launch>
+  <arg name="project_dir" default="" />
   <arg name="bag_file" default="rs_camera.bag" />
   <arg name="playback_speed" default="1" />
   <arg name="start_time" default="0.0" />
   <arg name="enable_pointcloud" default="true" />
 
   <include file="$(find realsense_ros_tools)/launch/rs_from_rosbag.launch">
+    <arg name="project_dir" value="$(arg project_dir)" />
     <arg name="bag_file" value="$(arg bag_file)" />
     <arg name="playback_speed" value="$(arg playback_speed)" />
     <arg name="start_time" value="$(arg start_time)" />
