@@ -9,6 +9,8 @@ find_package(catkin REQUIRED COMPONENTS
     tf2_ros
     cv_bridge
     sensor_msgs
+    realsense2_camera
+    rosbag_fancy
 )
 find_package(yaml-cpp REQUIRED)
 
@@ -21,6 +23,8 @@ catkin_package(
     tf2_ros
     cv_bridge
     sensor_msgs
+    realsense2_camera
+    rosbag_fancy
 )
 
 ###########

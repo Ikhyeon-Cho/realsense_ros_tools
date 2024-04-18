@@ -12,6 +12,8 @@
   <depend>tf2_ros</depend>
   <depend>cv_bridge</depend>
   <depend>sensor_msgs</depend>
+  <depend>realsense2_camera</depend>
+  <depend>rosbag_fancy</depend>
   <export>
   </export>
 </package>
