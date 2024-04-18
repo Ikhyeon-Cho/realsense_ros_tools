@@ -1,0 +1,16 @@
+<launch>
+  <arg name="_img_color" default="/camera/color/image_raw" />
+  <arg name="_img_depth" default="/camera/depth/image_rect_raw" />
+  <arg name="_img_depth_aligned" default="/camera/aligned_depth_to_color/image_raw" />
+
+  <!-- Raw Image republiser -->
+  <node name="rs_image_republisher_color" pkg="image_transport" type="republish"
+    args="compressed in:=$(arg _img_color) raw out:=$(arg _img_color)" />
+
+  <node name="rs_image_republisher_depth" pkg="image_transport" type="republish"
+    args="compressedDepth in:=$(arg _img_depth) raw out:=$(arg _img_depth)" />
+
+  <node name="rs_image_republisher_depth_aligned" pkg="image_transport" type="republish"
+    args="compressedDepth in:=$(arg _img_depth_aligned) raw out:=$(arg _img_depth_aligned)" />
+
+</launch>
