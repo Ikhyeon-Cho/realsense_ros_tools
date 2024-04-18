@@ -1,7 +1,9 @@
 <launch>
+  <arg name="project_dir" default="" />
   <arg name="bag_file" default="rs_camera.bag" />
 
   <include file="$(find realsense_ros_tools)/launch/rs_record.launch">
+    <arg name="project_dir" value="$(arg project_dir)" />
     <arg name="bag_file" value="$(arg bag_file)" />
   </include>
 

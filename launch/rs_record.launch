@@ -1,5 +1,6 @@
 <launch>
-  <arg name="bag_file" default="rs_camera.bag" /> 
+  <arg name="project_dir" default="" />
+  <arg name="bag_file" default="rs_camera.bag" />
   <!-- For preventing frame drop: High level PNG compression is too slow -->
   <!-- Change png_level from 9 to 4 -->
   <!-- <rosparam>
@@ -8,6 +9,7 @@
   </rosparam> -->
 
   <include file="$(find realsense_ros_tools)/launch/include/_record_rs.launch" >
+    <arg name="project_dir" value="$(arg project_dir)" />
     <arg name="bag_file" value="$(arg bag_file)" />
   </include>
 

@@ -1,6 +1,9 @@
 #!/bin/bash
 
-rosbag_fancy record --lz4 -o ~/Downloads/$1 /camera/color/metadata /camera/depth/metadata \
+# Create the directory if it doesn't exist
+mkdir -p ~/Downloads/$2
+
+rosbag_fancy record --lz4 -o ~/Downloads/$2/$1 /camera/color/metadata /camera/depth/metadata \
   /tf_static \
   /camera/color/camera_info \
   /camera/depth/camera_info \
