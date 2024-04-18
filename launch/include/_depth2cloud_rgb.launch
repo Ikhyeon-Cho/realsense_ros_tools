@@ -8,9 +8,9 @@
   <arg name="output_cloud_topic" default="/camera/depth/color/points" />
 
   <!-- Depth_image_proc/point_cloud_xyzrgb Nodelet- -->
-  <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" />
-  <node pkg="nodelet" type="nodelet" name="depth_image_proc"
-    args="load depth_image_proc/point_cloud_xyzrgb nodelet_manager">
+  <node pkg="nodelet" type="nodelet" name="rs_depth_image_proc_nodelet_manager" args="manager" />
+  <node pkg="nodelet" type="nodelet" name="rs_depth_image_proc_to_cloud_xyzrgb"
+    args="load depth_image_proc/point_cloud_xyzrgb rs_depth_image_proc_nodelet_manager">
     <remap from="rgb/camera_info" to="$(arg camera_color_info_topic)" />
     <remap from="rgb/image_rect_color" to="$(arg img_rect_color_topic)" />
     <remap from="depth_registered/image_rect" to="$(arg img_rect_depth_topic)" />
