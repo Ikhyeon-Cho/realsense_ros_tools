@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rosbag_fancy record --lz4 -o ~/rs_camera.bag /camera/color/metadata /camera/depth/metadata \
+rosbag_fancy record --lz4 -o ~/Downloads/$1 /camera/color/metadata /camera/depth/metadata \
   /tf_static \
   /camera/color/camera_info \
   /camera/depth/camera_info \

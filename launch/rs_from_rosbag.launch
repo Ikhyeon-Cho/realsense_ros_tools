@@ -1,0 +1,26 @@
+<launch>
+  <arg name="bag_file" default="rs_camera.bag" />
+  <arg name="playback_speed" default="1" />
+  <arg name="start_time" default="0.0" />
+  <arg name="enable_pointcloud" default="true" />
+
+  <!-- Raw Image republiser -->
+  <node name="image_color_republisher" pkg="image_transport" type="republish"
+    args="compressed in:=/camera/color/image_raw raw out:=/camera/color/image_raw" />
+
+  <node name="image_depth_republisher" pkg="image_transport" type="republish"
+    args="compressedDepth in:=/camera/aligned_depth_to_color/image_raw raw out:=/camera/aligned_depth_to_color/image_raw" />
+
+  <!-- Play rosbag file -->
+  <param name="/use_sim_time" value="true" />
+  <node name="rs_bag_player" pkg="rosbag" type="play" output="screen"
+    args="--clock -r $(arg playback_speed) -s $(arg start_time) $(env HOME)/Downloads/$(arg bag_file)" />
+
+  <!-- Publish point cloud -->
+  <include if="$(arg enable_pointcloud)" file="$(find realsense_ros_tools)/launch/include/_depth2cloud_rgb.launch">
+    <arg name="camera_color_info_topic" value="/camera/color/camera_info" />
+    <arg name="img_rect_color_topic" value="/camera/color/image_raw" />
+    <arg name="img_rect_depth_topic" value="/camera/aligned_depth_to_color/image_raw" />
+  </include>
+
+</launch>

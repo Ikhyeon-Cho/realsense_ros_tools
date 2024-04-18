@@ -1,5 +1,7 @@
 <launch>
-  <!-- Record Realsense Camera Topic (rs_camera.bag) -->
-  <node name="rs_camera_recorder" pkg="realsense_ros_tools" type="record_rs_camera.sh" output="screen" />
+  <arg name="bagfile_name" />
+
+  <node name="rs_camera_recorder" pkg="realsense_ros_tools" type="record_rs_camera.sh" output="screen"
+    args="$(arg bagfile_name)" />
 
 </launch>
