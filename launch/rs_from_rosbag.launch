@@ -1,8 +1,11 @@
 <launch>
+  <arg name="project_dir" default="" />
   <arg name="bag_file" default="rs_camera.bag" />
   <arg name="playback_speed" default="1" />
   <arg name="start_time" default="0.0" />
   <arg name="enable_pointcloud" default="true" />
+
+  <!-- Realsense topic info -->
   <arg name="_img_color" default="/camera/color/image_raw" />
   <arg name="_img_depth" default="/camera/depth/image_rect_raw" />
   <arg name="_img_depth_aligned" default="/camera/aligned_depth_to_color/image_raw" />
@@ -14,16 +17,16 @@
     <arg name="_img_depth_aligned" value="$(arg _img_depth_aligned)" />
   </include>
 
-  <!-- Play rosbag file -->
-  <param name="/use_sim_time" value="true" />
-  <node name="rs_bag_player" pkg="rosbag" type="play" output="screen"
-    args="--clock -r $(arg playback_speed) -s $(arg start_time) $(env HOME)/Downloads/$(arg bag_file)" />
-
   <!-- Publish point cloud -->
   <include if="$(arg enable_pointcloud)" file="$(find realsense_ros_tools)/launch/include/_depth2cloud_rgb.launch">
     <arg name="camera_color_info_topic" value="/camera/color/camera_info" />
     <arg name="img_rect_color_topic" value="$(arg _img_color)" />
     <arg name="img_rect_depth_topic" value="$(arg _img_depth_aligned)" />
   </include>
+
+  <!-- Play rosbag file -->
+  <param name="/use_sim_time" value="true" />
+  <node name="rs_bag_player" pkg="rosbag" type="play" output="screen"
+    args="--clock -r $(arg playback_speed) -s $(arg start_time) $(env HOME)/Downloads/$(arg project_dir)/$(arg bag_file)" />
 
 </launch>
