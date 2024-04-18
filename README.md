@@ -52,7 +52,7 @@ You can give several command-line arguments to the launch files.
   When set to **true**, depth image resized and aligned to the RGB image is published. Also, **sensor_msgs/PointCloud2** ROS message that has RGB8 field is published.
 
 - **`fps`** (int, default: 15)<br>
-  Camera image fps (frame per second). The driver natively supports 15/30/60/90 fps values. Any other values will result in 30 FPS, which is the device default.
+  Camera image fps (frame per second). The driver natively supports 15/30/60/90 fps values. Any other values will result in the setting of 30 FPS, which is the device default.
 
 Here is an example command using launch argument options:
 ```
@@ -62,8 +62,7 @@ Here is an example command using launch argument options:
 roslaunch realsense_ros_tools rs_camera.launch fps:=30 align_depth:=false
 ```
 ### 2. Record data
-To record the image streams, use the command below:<br>
-Make sure that the device is running.
+To record the image streams, use the command below. Before starting the records, make sure that the device is running.
 ```
 roslaunch realsense_ros_tools rs_record.launch    # Default: 'rs_camera.bag' is saved to ~/Downloads folder
 ```
