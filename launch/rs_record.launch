@@ -8,9 +8,7 @@
     /camera/aligned_depth_to_color/image_raw/compressedDepth/png_level: 4
   </rosparam> -->
 
-  <include file="$(find realsense_ros_tools)/launch/include/_record_rs.launch" >
-    <arg name="project_dir" value="$(arg project_dir)" />
-    <arg name="bag_file" value="$(arg bag_file)" />
-  </include>
+  <node name="rs_camera_recorder" pkg="realsense_ros_tools" type="record_rs_camera.sh" output="screen"
+  args="$(arg bag_file) $(arg project_dir)" />
 
 </launch>

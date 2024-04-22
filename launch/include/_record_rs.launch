@@ -1,8 +1,0 @@
-<launch>
-  <arg name="project_dir" default="" />
-  <arg name="bag_file" default="rs_camera.bag" />
-
-  <node name="rs_camera_recorder" pkg="realsense_ros_tools" type="record_rs_camera.sh" output="screen"
-    args="$(arg bag_file) $(arg project_dir)" />
-
-</launch>
