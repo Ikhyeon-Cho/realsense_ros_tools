@@ -1,28 +1,50 @@
 <launch>
-  <arg name="align_depth" default="true" />
+  <!-- Device specific param -->
+  <arg name="camera_ns" default="camera" />
+  <arg name="serial_no" default="" />
+
+  <!-- Image params -->
   <arg name="fps" default="15" />
+  <arg name="color_width" default="640" />
+  <arg name="color_height" default="480" />
+  <arg name="depth_width" default="640" />
+  <arg name="depth_height" default="480" />
+
+  <arg name="align_depth" default="false" />
+
+  <!-- Pointcloud params -->
+  <arg name="enable_pointcloud" default="true" />
+  <arg name="ordered_pc" default="true" />
+
+  <!-- Sensor params -->
+  <arg name="enable_gyro" default="false" />
+  <arg name="enable_accel" default="false" />
+
   <!-- For preventing frame drop: High level PNG compression is too slow -->
-  <!-- Change png_level from 9 to 4 -->
+  <!-- Change png_level from 9 to 1 -->
   <rosparam>
-    /camera/depth/image_rect_raw/compressedDepth/png_level: 4
-    /camera/aligned_depth_to_color/image_raw/compressedDepth/png_level: 4
+    /camera/depth/image_rect_raw/compressedDepth/png_level: 1
+    /camera/aligned_depth_to_color/image_raw/compressedDepth/png_level: 1
   </rosparam>
 
   <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+    <arg name="camera" value="$(arg camera_ns)" />
+    <arg name="serial_no" value="$(arg serial_no)" />
+    <arg name="manager" value="$(arg camera_ns)_camera_manager" />
     <arg name="color_fps" value="$(arg fps)" />
     <arg name="depth_fps" value="$(arg fps)" />
-    <arg name="color_width" default="1280" />
-    <arg name="color_height" default="720" />
-    <arg name="depth_width" default="848" />
-    <arg name="depth_height" default="480" />
+    <arg name="color_width" default="$(arg color_width)" />
+    <arg name="color_height" default="$(arg color_height)" />
+    <arg name="depth_width" default="$(arg depth_width)" />
+    <arg name="depth_height" default="$(arg depth_height)" />
 
     <arg name="align_depth" default="$(arg align_depth)" />
-    <arg name="enable_pointcloud" value="$(arg align_depth)" />
-    <arg name="ordered_pc" default="true" />
+    <arg name="enable_pointcloud" value="$(arg enable_pointcloud)" />
+    <arg name="ordered_pc" default="$(arg ordered_pc)" />
     <arg name="filters" default="temporal,decimation,spatial,disparity" />
 
-    <arg name="enable_gyro" default="true" />
-    <arg name="enable_accel" default="true" />
+    <arg name="enable_gyro" default="$(arg enable_gyro)" />
+    <arg name="enable_accel" default="$(arg enable_accel)" />
   </include>
 
 </launch>

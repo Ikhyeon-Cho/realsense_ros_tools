@@ -1,12 +1,12 @@
 <launch>
-  <arg name="align_depth" default="true" />
+  <arg name="enable_pointcloud" default="true" />
   <arg name="fps" default="15" />
 
   <include file="$(find realsense_ros_tools)/launch/rs_camera.launch" >
-    <arg name="align_depth" default="$(arg align_depth)" />
-    <arg name="fps" default="$(arg fps)" />
+    <arg name="enable_pointcloud" value="$(arg enable_pointcloud)" />
+    <arg name="fps" value="$(arg fps)" />
   </include>
 
   <!-- RViz -->
-  <node name="rs_rosbag" pkg="rviz" type="rviz" args="-d $(find realsense_ros_tools)/launch/rviz/rs_camera.rviz" />
+  <node name="rviz_rs_camera" pkg="rviz" type="rviz" args="-d $(find realsense_ros_tools)/launch/rviz/rs_camera.rviz" />
 </launch>
