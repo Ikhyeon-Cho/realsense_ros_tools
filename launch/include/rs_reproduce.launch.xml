@@ -7,14 +7,14 @@
   <arg name="_img_depth_aligned" default="/camera/aligned_depth_to_color/image_raw" />
 
   <!-- Raw Image republiser -->
-  <include file="$(find realsense_ros_tools)/launch/include/_compressed2raw.launch">
+  <include file="$(find realsense_ros_tools)/launch/include/compressed2raw.launch.xml">
     <arg name="_img_color" value="$(arg _img_color)" />
     <arg name="_img_depth" value="$(arg _img_depth)" />
     <arg name="_img_depth_aligned" value="$(arg _img_depth_aligned)" />
   </include>
 
   <!-- Publish point cloud -->
-  <include if="$(arg enable_pointcloud)" file="$(find realsense_ros_tools)/launch/include/_depth2cloud_rgb.launch">
+  <include if="$(arg enable_pointcloud)" file="$(find realsense_ros_tools)/launch/include/depth2cloud_rgb.launch.xml">
     <arg name="camera_color_info_topic" value="/camera/color/camera_info" />
     <arg name="img_rect_color_topic" value="$(arg _img_color)" />
     <arg name="img_rect_depth_topic" value="$(arg _img_depth_aligned)" />

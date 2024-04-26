@@ -5,7 +5,7 @@
   <arg name="start_time" default="0.0" />
   <arg name="enable_pointcloud" default="true" />
 
-  <include file="$(find realsense_ros_tools)/launch/include/_rs_reproduce.launch">
+  <include file="$(find realsense_ros_tools)/launch/include/rs_reproduce.launch.xml">
     <arg name="enable_pointcloud" value="$(arg enable_pointcloud)" />
   </include>
 
