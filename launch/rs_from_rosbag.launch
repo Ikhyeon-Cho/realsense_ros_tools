@@ -1,17 +1,27 @@
 <launch>
+  <arg name="camera_ns" default="camera" />
   <arg name="project_dir" default="" />
-  <arg name="bag_file" default="rs_camera.bag" />
-  <arg name="playback_speed" default="1" />
-  <arg name="start_time" default="0.0" />
+  <arg name="bagfile_name" default="rs_camera.bag" /> <!-- Bag file name -->
+
   <arg name="enable_pointcloud" default="true" />
 
-  <include file="$(find realsense_ros_tools)/launch/include/rs_reproduce.launch.xml">
-    <arg name="enable_pointcloud" value="$(arg enable_pointcloud)" />
+  <arg name="playback_speed" default="1" />
+  <arg name="start_time" default="0.0" />
+
+  <!-- Raw Image republisher -->
+  <include file="$(find realsense_ros_tools)/launch/include/compressed2raw.launch.xml">
+    <arg name="camera_ns" value="$(arg camera_ns)" />
+  </include>
+
+  <!-- Publish pointcloud -->
+  <include if="$(arg enable_pointcloud)"
+    file="$(find realsense_ros_tools)/launch/include/depth2cloud_rgb.launch.xml">
+    <arg name="camera_ns" value="$(arg camera_ns)" />
   </include>
 
   <!-- Play rosbag file -->
   <param name="/use_sim_time" value="true" />
-  <node name="rs_bag_player" pkg="rosbag" type="play" output="screen"
-    args="--clock -r $(arg playback_speed) -s $(arg start_time) $(env HOME)/Downloads/$(arg project_dir)/$(arg bag_file)" />
+  <node name="$(arg camera_ns)_player" pkg="rosbag" type="play" output="screen"
+    args="--clock -r $(arg playback_speed) -s $(arg start_time) $(env HOME)/Downloads/$(arg project_dir)/$(arg bagfile_name)" />
 
 </launch>

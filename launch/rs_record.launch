@@ -1,14 +1,19 @@
 <launch>
-  <arg name="project_dir" default="" />
-  <arg name="bag_file" default="rs_camera.bag" />
-  <!-- For preventing frame drop: High level PNG compression is too slow -->
-  <!-- Change png_level from 9 to 4 -->
-  <!-- <rosparam>
-    /camera/depth/image_rect_raw/compressedDepth/png_level: 4
-    /camera/aligned_depth_to_color/image_raw/compressedDepth/png_level: 4
-  </rosparam> -->
+  <arg name="camera_ns" default="camera" />
+  <arg name="project_dir" default="" /> <!-- Which folder name? in Downloads folder -->
+  <arg name="bagfile_name" default="rs_camera.bag" /> <!-- Bag file name -->
 
-  <node name="rs_camera_recorder" pkg="realsense_ros_tools" type="record_rs_camera.sh" output="screen"
-  args="$(arg bag_file) $(arg project_dir)" />
+  <arg name="enable_imu" default="false" />   <!-- Data recording option -->
+
+  <!-- Launch rosbag record shell script -->
+  <group if="$(arg enable_imu)">
+    <node name="rs_recorder_imu" pkg="realsense_ros_tools" type="record_rs_camera_imu.sh"
+      args="$(arg camera_ns) $(arg project_dir) $(arg bagfile_name)" output="screen" />
+  </group>
+
+  <group unless="$(arg enable_imu)">
+    <node name="rs_recorder" pkg="realsense_ros_tools" type="record_rs_camera.sh"
+      args="$(arg camera_ns) $(arg project_dir) $(arg bagfile_name)" output="screen" />
+  </group>
 
 </launch>

@@ -1,18 +1,20 @@
 <launch>
   <arg name="project_dir" default="" />
-  <arg name="bag_file" default="rs_camera.bag" />
+  <arg name="camera_ns" default="camera" /> <!-- Bag file name -->
+
   <arg name="playback_speed" default="1" />
   <arg name="start_time" default="0.0" />
+
   <arg name="enable_pointcloud" default="true" />
 
   <include file="$(find realsense_ros_tools)/launch/rs_from_rosbag.launch">
     <arg name="project_dir" value="$(arg project_dir)" />
-    <arg name="bag_file" value="$(arg bag_file)" />
+    <arg name="camera_ns" value="$(arg camera_ns)" />
     <arg name="playback_speed" value="$(arg playback_speed)" />
     <arg name="start_time" value="$(arg start_time)" />
     <arg name="enable_pointcloud" value="$(arg enable_pointcloud)" />
   </include>
 
   <!-- RViz -->
-  <node name="rviz_rs_rosbag" pkg="rviz" type="rviz" args="-d $(find realsense_ros_tools)/launch/rviz/rs_camera.rviz" />
+  <node name="rviz_$(arg camera_ns)_rosbag" pkg="rviz" type="rviz" args="-d $(find realsense_ros_tools)/launch/rviz/rs_camera.rviz" />
 </launch>

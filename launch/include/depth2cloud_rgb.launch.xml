@@ -1,0 +1,23 @@
+<launch>
+  <!-- Input topic -->
+  <arg name="camera_ns" default="camera" />
+  <arg name="camera_color_info_topic" default="/$(arg camera_ns)/color/camera_info" />
+  <arg name="img_rect_color_topic" default="/$(arg camera_ns)/color/image_raw" />
+  <arg name="img_aligned_depth_topic" default="/$(arg camera_ns)/aligned_depth_to_color/image_raw" />
+
+  <!-- Output topic -->
+  <arg name="output_cloud_topic" default="/$(arg camera_ns)/pointcloud/points" />
+
+  <!-- Depth_image_proc/point_cloud_xyzrgb Nodelet- -->
+  <group ns="$(arg camera_ns)">
+    <node pkg="nodelet" type="nodelet" name="depth_image_proc_nodelet_manager" args="manager" />
+    <node pkg="nodelet" type="nodelet" name="depth_image_proc_to_cloud_xyzrgb"
+      args="load depth_image_proc/point_cloud_xyzrgb depth_image_proc_nodelet_manager">
+      <remap from="rgb/camera_info" to="$(arg camera_color_info_topic)" />
+      <remap from="rgb/image_rect_color" to="$(arg img_rect_color_topic)" />
+      <remap from="depth_registered/image_rect" to="$(arg img_aligned_depth_topic)" />
+      <remap from="depth_registered/points" to="$(arg output_cloud_topic)" />
+    </node>
+  </group>
+
+</launch>
