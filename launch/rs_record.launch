@@ -6,14 +6,16 @@
   <arg name="enable_imu" default="false" />   <!-- Data recording option -->
 
   <!-- Launch rosbag record shell script -->
-  <group if="$(arg enable_imu)">
-    <node name="rs_recorder_imu" pkg="realsense_ros_tools" type="record_rs_camera_imu.sh"
-      args="$(arg camera_ns) $(arg project_dir) $(arg bagfile_name)" output="screen" />
-  </group>
+  <group ns="$(arg camera_ns)">
+    <group if="$(arg enable_imu)">
+      <node name="rs_recorder_imu" pkg="realsense_ros_tools" type="record_rs_camera_imu.sh"
+        args="$(arg camera_ns) $(arg project_dir) $(arg bagfile_name)" output="screen" />
+    </group>
 
-  <group unless="$(arg enable_imu)">
-    <node name="rs_recorder" pkg="realsense_ros_tools" type="record_rs_camera.sh"
-      args="$(arg camera_ns) $(arg project_dir) $(arg bagfile_name)" output="screen" />
+    <group unless="$(arg enable_imu)">
+      <node name="rs_recorder" pkg="realsense_ros_tools" type="record_rs_camera.sh"
+        args="$(arg camera_ns) $(arg project_dir) $(arg bagfile_name)" output="screen" />
+    </group>
   </group>
 
 </launch>
