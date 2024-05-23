@@ -1,9 +1,9 @@
 <launch>
   <!-- Input topic -->
-  <arg name="camera_ns" default="camera" />
+  <arg name="camera_ns" default="rs_camera" />
   <arg name="camera_color_info_topic" default="/$(arg camera_ns)/color/camera_info" />
-  <arg name="img_rect_color_topic" default="/$(arg camera_ns)/color/image_raw" />
-  <arg name="img_aligned_depth_topic" default="/$(arg camera_ns)/aligned_depth_to_color/image_raw" />
+  <arg name="img_rect_color_topic" default="/$(arg camera_ns)/color/image" />
+  <arg name="img_aligned_depth_topic" default="/$(arg camera_ns)/depth_aligned/image" />
 
   <!-- Output topic -->
   <arg name="output_cloud_topic" default="/$(arg camera_ns)/pointcloud/points" />

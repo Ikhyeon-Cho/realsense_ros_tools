@@ -1,7 +1,13 @@
 <launch>
   <!-- Device specific param -->
-  <arg name="camera_ns" default="camera" />
+  <arg name="camera_ns" default="rs_camera" />
   <arg name="serial_no" default="" />
+
+  <!-- Pointcloud params -->
+  <arg name="enable_pointcloud" default="true" />
+
+  <!-- Sensor params -->
+  <arg name="enable_imu" default="false" />
 
   <!-- Image params -->
   <arg name="fps" default="15" />
@@ -10,23 +16,28 @@
   <arg name="depth_width" default="640" />
   <arg name="depth_height" default="480" />
 
-  <!-- Pointcloud params -->
-  <arg name="enable_pointcloud" default="true" />
-
-  <!-- Sensor params -->
-  <arg name="enable_imu" default="false" />
+  <!-- Remap topic -->
+  <remap from="/$(arg camera_ns)/color/image_raw" to="/$(arg camera_ns)/color/image" />
+  <remap from="/$(arg camera_ns)/depth/image_rect_raw" to="/$(arg camera_ns)/depth/image" />
+  <remap from="/$(arg camera_ns)/aligned_depth_to_color/camera_info" to="/$(arg camera_ns)/depth_aligned/camera_info" />
+  <remap from="/$(arg camera_ns)/aligned_depth_to_color/image_raw" to="/$(arg camera_ns)/depth_aligned/image" />
 
   <!-- For preventing frame drop: High level PNG compression is too slow -->
   <!-- Change png_level from 9 to 1 -->
-  <param name="/$(arg camera_ns)/depth/image_rect_raw/compressedDepth/png_level" value="1" />
-  <param name="/$(arg camera_ns)/aligned_depth_to_color/image_raw/compressedDepth/png_level" value="1" />
+  <param name="/$(arg camera_ns)/depth/image/compressedDepth/png_level" value="1" />
+  <param name="/$(arg camera_ns)/depth_aligned/image/compressedDepth/png_level" value="1" />
 
+  <!-- Launch Realsense ROS -->
   <include file="$(find realsense2_camera)/launch/rs_camera.launch">
     <arg name="camera" value="$(arg camera_ns)" />
     <arg name="serial_no" value="$(arg serial_no)" />
     <arg name="manager" value="realsense2_camera_manager" />
+
+    <!-- Camera FPS -->
     <arg name="color_fps" value="$(arg fps)" />
     <arg name="depth_fps" value="$(arg fps)" />
+
+    <!-- Image size -->
     <arg name="color_width" default="$(arg color_width)" />
     <arg name="color_height" default="$(arg color_height)" />
     <arg name="depth_width" default="$(arg depth_width)" />
@@ -37,13 +48,15 @@
     <arg name="align_depth" default="true" />
     <arg name="filters" default="temporal,decimation,spatial,disparity" />
 
+    <!-- Built-in IMU -->
     <arg name="enable_gyro" default="$(arg enable_imu)" />
     <arg name="enable_accel" default="$(arg enable_imu)" />
+
   </include>
 
+  <!-- Depth image proc package -->
   <!-- Publish pointcloud by using depth_image_proc -->
-  <include if="$(arg enable_pointcloud)"
-    file="$(find realsense_ros_tools)/launch/include/depth2cloud_rgb.launch.xml">
+  <include if="$(arg enable_pointcloud)" file="$(find realsense_ros_tools)/launch/include/depth2cloud_rgb.launch.xml">
     <arg name="camera_ns" value="$(arg camera_ns)" />
   </include>
 

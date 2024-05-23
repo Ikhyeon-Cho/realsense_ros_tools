@@ -1,6 +1,6 @@
 <launch>
-  <arg name="camera_ns" default="camera" />
-  <arg name="project_dir" default="" /> <!-- Which folder name? in Downloads folder -->
+  <arg name="camera_ns" default="rs_camera" />
+  <arg name="project_dir" default="rs_camera/test" /> <!-- Which folder name? in Downloads folder -->
   <arg name="bagfile_name" default="rs_camera.bag" /> <!-- Bag file name -->
 
   <arg name="enable_imu" default="false" />   <!-- Data recording option -->

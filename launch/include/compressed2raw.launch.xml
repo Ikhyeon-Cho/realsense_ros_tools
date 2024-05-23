@@ -1,8 +1,8 @@
 <launch>
-  <arg name="camera_ns" default="camera" />
-  <arg name="img_color" default="/$(arg camera_ns)/color/image_raw" />
-  <arg name="img_depth" default="/$(arg camera_ns)/depth/image_rect_raw" />
-  <arg name="img_aligned_depth" default="/$(arg camera_ns)/aligned_depth_to_color/image_raw" />
+  <arg name="camera_ns" default="rs_camera" />
+  <arg name="img_color" default="/$(arg camera_ns)/color/image" />
+  <arg name="img_depth" default="/$(arg camera_ns)/depth/image" />
+  <arg name="img_aligned_depth" default="/$(arg camera_ns)/depth_aligned/image" />
 
   <!-- Raw Image republiser -->
   <node name="$(arg camera_ns)_img_republisher_color" pkg="image_transport" type="republish"

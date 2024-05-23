@@ -1,6 +1,6 @@
 <launch>
-  <arg name="camera_ns" default="camera" />
-  <arg name="project_dir" default="" />
+  <arg name="camera_ns" default="rs_camera" />
+  <arg name="project_dir" default="rs_camera/test" />
   <arg name="bagfile_name" default="rs_camera.bag" /> <!-- Bag file name -->
 
   <arg name="enable_pointcloud" default="true" />
